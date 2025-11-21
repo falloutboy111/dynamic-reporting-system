@@ -38,7 +38,7 @@ class SqlQueryValidator
             ];
         }
 
-        // Block dangerous keywords
+        // Block dangerous keywords using word boundaries to avoid false positives
         $dangerousKeywords = [
             'INSERT',
             'UPDATE',
@@ -57,16 +57,17 @@ class SqlQueryValidator
             'LOCK',
             'UNLOCK',
             'RENAME',
-            'LOAD DATA',
-            'INTO OUTFILE',
-            'INTO DUMPFILE',
+            'LOAD\s+DATA',
+            'INTO\s+OUTFILE',
+            'INTO\s+DUMPFILE',
         ];
 
         foreach ($dangerousKeywords as $keyword) {
-            if (strpos($upperQuery, $keyword) !== false) {
+            // Use word boundaries to match whole words only (e.g., CREATE won't match created_at)
+            if (preg_match('/\b' . $keyword . '\b/i', $query)) {
                 return [
                     'valid' => false,
-                    'error' => "Query contains invalid operation: {$keyword}",
+                    'error' => "Query contains invalid operation: " . str_replace('\s+', ' ', $keyword),
                 ];
             }
         }

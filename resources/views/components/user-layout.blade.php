@@ -18,18 +18,6 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
         @fluxAppearance
-
-        <!-- Theme Script - Must run before page renders -->
-        <script>
-            (function() {
-                const theme = localStorage.getItem('theme');
-                if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            })();
-        </script>
     </head>
     <body class="min-h-screen bg-zinc-50 dark:bg-zinc-900">
         {{-- Desktop and Mobile Sidebar --}}
@@ -68,9 +56,29 @@
 
             <flux:sidebar.spacer />
 
-            {{-- Theme Toggle --}}
-            <div class="px-4 py-2 border-t border-neutral-200 dark:border-neutral-700">
-                <x-theme-toggle />
+            {{-- Theme Switcher --}}
+            <div class="px-2 py-2 border-t border-zinc-200 dark:border-zinc-700">
+                <flux:dropdown align="end">
+                    <flux:button variant="ghost" size="sm" class="w-full justify-start" x-data>
+                        <flux:icon.sun x-show="$flux.appearance === 'light'" variant="mini" class="size-5" />
+                        <flux:icon.moon x-show="$flux.appearance === 'dark'" variant="mini" class="size-5" />
+                        <flux:icon.moon x-show="$flux.appearance === 'system' && $flux.dark" variant="mini" class="size-5" />
+                        <flux:icon.sun x-show="$flux.appearance === 'system' && ! $flux.dark" variant="mini" class="size-5" />
+                        <span>{{ __('Theme') }}</span>
+                    </flux:button>
+                    
+                    <flux:menu>
+                        <flux:menu.item icon="sun" x-on:click="$flux.appearance = 'light'">
+                            {{ __('Light') }}
+                        </flux:menu.item>
+                        <flux:menu.item icon="moon" x-on:click="$flux.appearance = 'dark'">
+                            {{ __('Dark') }}
+                        </flux:menu.item>
+                        <flux:menu.item icon="computer-desktop" x-on:click="$flux.appearance = 'system'">
+                            {{ __('System') }}
+                        </flux:menu.item>
+                    </flux:menu>
+                </flux:dropdown>
             </div>
 
             {{-- Organization Info --}}
