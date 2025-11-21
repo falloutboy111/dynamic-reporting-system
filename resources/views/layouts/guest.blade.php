@@ -18,7 +18,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="/" wire:navigate>
-                    <img src="https://www.virtualcfogroup.com.au/wp-content/uploads/2024/09/Virtual-CFO-Group_Vertical-01.png" alt="{{ config('app.name', 'Virtual CFO Group') }}" class="w-32 h-auto" />
+                    <img src="https://www.enclivix.com/images/logos/logo.svg" alt="{{ config('app.name', 'Virtual CFO Group') }}" class="w-32 h-auto" />
                 </a>
             </div>
 

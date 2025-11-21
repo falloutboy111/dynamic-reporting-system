@@ -23,7 +23,7 @@
                 <flux:sidebar.brand
                     href="{{ route('dashboard') }}"
                     name="{{ config('app.name', 'Laravel') }}"
-                    logo="https://www.virtualcfogroup.com.au/wp-content/uploads/2024/09/Virtual-CFO-Group_Vertical-01.png"
+                    logo="https://www.enclivix.com/images/logos/logo.svg"
                 />
 
                 <flux:sidebar.collapse class="lg:hidden" />
