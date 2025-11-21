@@ -83,7 +83,7 @@ class OrganisationManagement extends Component
                 'database_name' => $this->database_name,
                 'database_username' => $this->database_username,
                 'database_password' => $this->database_password,
-                'database_port' => $this->database_port,
+                'database_port' => (int) $this->database_port,
                 'is_active' => $this->is_active,
             ]);
 
@@ -95,7 +95,7 @@ class OrganisationManagement extends Component
                 'database_name' => $this->database_name,
                 'database_username' => $this->database_username,
                 'database_password' => $this->database_password,
-                'database_port' => $this->database_port,
+                'database_port' => (int) $this->database_port,
                 'is_active' => $this->is_active,
             ]);
 
@@ -122,7 +122,7 @@ class OrganisationManagement extends Component
             $this->database_name,
             $this->database_username,
             $this->database_password,
-            $this->database_port
+            (int) $this->database_port
         );
 
         $this->testConnectionResult = $result['success'];
