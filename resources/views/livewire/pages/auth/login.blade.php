@@ -20,13 +20,29 @@ new #[Layout('layouts.guest')] class extends Component
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        // Redirect based on user role
+        $user = auth()->user();
+        
+        if ($user->hasRole('admin')) {
+            $this->redirect(route('admin.dashboard', absolute: false), navigate: true);
+        } elseif ($user->hasRole('user')) {
+            $this->redirect(route('user.dashboard', absolute: false), navigate: true);
+        } else {
+            // Fallback if user has no role
+            auth()->logout();
+            $this->addError('form.email', 'Your account does not have the necessary permissions.');
+        }
     }
 }; ?>
 
 <div>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <div class="mb-6 text-center">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ __('Welcome Back') }}</h2>
+        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Sign in to access your dashboard') }}</p>
+    </div>
 
     <form wire:submit="login">
         <!-- Email Address -->

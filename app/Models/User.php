@@ -25,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'organisation_id',
     ];
 
     /**
@@ -62,5 +63,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function organisation()
+    {
+        return $this->belongsTo(Organisation::class);
+    }
+
+    public function createdReports()
+    {
+        return $this->hasMany(Report::class, 'created_by');
     }
 }

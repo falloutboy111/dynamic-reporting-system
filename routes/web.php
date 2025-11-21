@@ -1,35 +1,48 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\OrganisationManagement;
+use App\Livewire\Admin\UserManagement;
+use App\Livewire\Admin\ReportBuilder;
+use App\Livewire\User\ReportsList;
+use App\Livewire\User\ReportView;
 
+// Root redirect based on authentication and role
 Route::get('/', function () {
-    return auth()->check() 
-        ? redirect()->route('dashboard') 
-        : redirect()->route('login');
+    if (!auth()->check()) {
+        return redirect()->route('login');
+    }
+
+    if (auth()->user()->hasRole('admin')) {
+        return redirect()->route('admin.dashboard');
+    }
+
+    if (auth()->user()->hasRole('user')) {
+        return redirect()->route('user.dashboard');
+    }
+
+    auth()->logout();
+    return redirect()->route('login');
 });
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Admin Routes
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    Route::view('dashboard', 'admin.dashboard')->name('dashboard');
+    Route::get('organisations', OrganisationManagement::class)->name('organisations.index');
+    Route::get('users', UserManagement::class)->name('users.index');
+    Route::get('reports', ReportBuilder::class)->name('reports.index');
+});
 
-Route::view('client-sync', 'client-sync')
-    ->middleware(['auth'])
-    ->name('client-sync.index');
+// User Routes
+Route::prefix('user')->name('user.')->middleware(['auth', 'user'])->group(function () {
+    Route::view('dashboard', 'user.dashboard')->name('dashboard');
+    Route::get('reports', ReportsList::class)->name('reports.index');
+    Route::get('reports/{id}', ReportView::class)->name('reports.view');
+});
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
-
-Route::view('users', 'users')
-    ->middleware(['auth'])
-    ->name('users.index');
-
-Route::view('logs', 'logs')
-    ->middleware(['auth'])
-    ->name('logs.index');
-
-Route::view('reports', 'reports')
-    ->middleware(['auth'])
-    ->name('reports.index');
+// Shared Routes (both admin and user)
+Route::middleware(['auth'])->group(function () {
+    Route::view('profile', 'profile')->name('profile');
+});
 
 require __DIR__.'/auth.php';

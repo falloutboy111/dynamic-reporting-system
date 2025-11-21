@@ -17,25 +17,13 @@ class OrganisationFactory extends Factory
     public function definition(): array
     {
         return [
-            'organisation_id' => fake()->uuid(),
-            'api_key' => fake()->optional()->uuid(),
             'name' => fake()->company(),
-            'legal_name' => fake()->company() . ' Pty Ltd',
-            'pays_tax' => fake()->boolean() ? 'YES' : 'NO',
-            'version' => 'AU',
-            'organisation_type' => fake()->randomElement(['COMPANY', 'CHARITY', 'PARTNERSHIP', 'SOLE_TRADER']),
-            'base_currency' => 'AUD',
-            'country_code' => 'AU',
-            'is_demo_company' => fake()->boolean(20),
-            'organisation_status' => fake()->randomElement(['ACTIVE', 'ARCHIVED']),
-            'registration_number' => fake()->optional()->numerify('ABN##########'),
-            'tax_number' => fake()->optional()->numerify('##########'),
-            'financial_year_end_day' => fake()->numberBetween(1, 28),
-            'financial_year_end_month' => fake()->numberBetween(1, 12),
-            'timezone' => 'Australia/Sydney',
-            'organisation_entity_type' => fake()->randomElement(['COMPANY', 'CHARITY', 'PARTNERSHIP', 'SOLE_TRADER']),
-            'short_code' => fake()->optional()->lexify('???'),
-            'last_sync' => fake()->optional()->dateTimeBetween('-30 days', 'now'),
+            'database_host' => fake()->optional()->ipv4(),
+            'database_name' => fake()->optional()->lexify('db_????????'),
+            'database_username' => fake()->optional()->userName(),
+            'database_password' => fake()->optional()->password(),
+            'database_port' => fake()->randomElement([3306, 5432, 1433]),
+            'is_active' => fake()->boolean(80), // 80% chance of being active
         ];
     }
 }
