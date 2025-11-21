@@ -74,6 +74,11 @@
 
             <flux:sidebar.spacer />
 
+            {{-- Theme Toggle --}}
+            <div class="px-4 py-2 border-t border-neutral-200 dark:border-neutral-700">
+                <x-theme-toggle />
+            </div>
+
             <flux:dropdown position="top" align="start" class="max-lg:hidden">
                 <flux:sidebar.profile 
                     name="{{ auth()->user()->name }}" 
