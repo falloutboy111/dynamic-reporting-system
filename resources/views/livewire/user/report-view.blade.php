@@ -14,15 +14,15 @@
     </x-slot>
 
     @if (session()->has('message'))
-        <flux:banner class="mb-6">
+        <x-banner class="mb-6">
             {{ session('message') }}
-        </flux:banner>
+        </x-banner>
     @endif
 
     @if (session()->has('error'))
-        <flux:banner variant="danger" class="mb-6">
+        <x-banner variant="danger" class="mb-6">
             {{ session('error') }}
-        </flux:banner>
+        </x-banner>
     @endif
 
     <div class="space-y-6">
@@ -54,9 +54,9 @@
             </x-card>
         @elseif($error)
             <!-- Error State -->
-            <flux:banner variant="danger">
+            <x-banner variant="danger">
                 {{ $error }}
-            </flux:banner>
+            </x-banner>
         @elseif(count($results) > 0)
             <!-- Report Content -->
             @if($report->visualization_type === 'chart' && $report->chart_config)

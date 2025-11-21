@@ -5,9 +5,9 @@
     </x-slot>
 
     @if(!auth()->user()->organisation_id)
-        <flux:banner variant="warning">
+        <x-banner variant="warning">
             {{ __('You are not assigned to an organization. Please contact your administrator.') }}
-        </flux:banner>
+        </x-banner>
     @else
         <div class="space-y-6">
             <!-- Search -->

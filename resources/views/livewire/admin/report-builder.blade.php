@@ -7,9 +7,9 @@
         </x-slot>
 
         @if (session()->has('message'))
-            <flux:banner variant="success" class="mb-6">
+            <x-banner variant="success" class="mb-6">
                 {{ session('message') }}
-            </flux:banner>
+            </x-banner>
         @endif
 
         <div class="space-y-6">
@@ -37,7 +37,7 @@
             </div>
 
             <!-- Reports Table -->
-            <flux:table>
+            <x-table>
                 <flux:columns>
                     <flux:column>{{ __('Name') }}</flux:column>
                     <flux:column>{{ __('Organization') }}</flux:column>
@@ -115,7 +115,7 @@
                         </flux:row>
                     @endforelse
                 </flux:rows>
-            </flux:table>
+            </x-table>
 
             <!-- Pagination -->
             <div>
@@ -139,15 +139,15 @@
         </x-slot>
 
         @if (session()->has('message'))
-            <flux:banner variant="success" class="mb-6">
+            <x-banner variant="success" class="mb-6">
                 {{ session('message') }}
-            </flux:banner>
+            </x-banner>
         @endif
 
         @if (session()->has('error'))
-            <flux:banner variant="danger" class="mb-6">
+            <x-banner variant="danger" class="mb-6">
                 {{ session('error') }}
-            </flux:banner>
+            </x-banner>
         @endif
 
         <form wire:submit.prevent="saveReport">
@@ -349,9 +349,9 @@
 
             <flux:modal.content>
                 @if($previewError)
-                    <flux:banner variant="danger">
+                    <x-banner variant="danger">
                         <strong>{{ __('Validation Error:') }}</strong> {{ $previewError }}
-                    </flux:banner>
+                    </x-banner>
                 @elseif(count($previewResults) > 0)
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">

@@ -5,9 +5,9 @@
     </x-slot>
 
     @if (session()->has('message'))
-        <flux:banner variant="success" class="mb-6">
+        <x-banner variant="success" class="mb-6">
             {{ session('message') }}
-        </flux:banner>
+        </x-banner>
     @endif
 
     <div class="space-y-6">
@@ -26,7 +26,7 @@
         </div>
 
         <!-- Organizations Table -->
-        <flux:table>
+        <x-table>
             <flux:columns>
                 <flux:column>{{ __('Name') }}</flux:column>
                 <flux:column>{{ __('Database') }}</flux:column>
@@ -103,7 +103,7 @@
                     </flux:row>
                 @endforelse
             </flux:rows>
-        </flux:table>
+        </x-table>
 
         <!-- Pagination -->
         <div>
