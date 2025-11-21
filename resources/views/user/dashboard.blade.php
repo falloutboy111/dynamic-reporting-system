@@ -74,7 +74,7 @@
                     <x-card.content>
                         <div class="space-y-4">
                             @foreach($recentReports as $report)
-                                <a href="{{ route('user.reports.view', $report->id) }}" wire:navigate class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg px-4 -mx-4 transition-colors">
+                                <a href="{{ route('user.reports.view', $report->id) }}" wire:navigate class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700 last:border-0 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-lg px-4 -mx-4 transition-colors">
                                     <div class="flex-1">
                                         <div class="font-medium text-gray-900 dark:text-gray-100">{{ $report->name }}</div>
                                         @if($report->description)

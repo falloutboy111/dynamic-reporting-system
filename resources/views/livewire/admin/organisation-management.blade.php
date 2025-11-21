@@ -27,23 +27,23 @@
 
         <!-- Organizations Table -->
         <x-table>
-            <flux:columns>
-                <flux:column>{{ __('Name') }}</flux:column>
-                <flux:column>{{ __('Database') }}</flux:column>
-                <flux:column>{{ __('Status') }}</flux:column>
-                <flux:column>{{ __('Created') }}</flux:column>
-                <flux:column>{{ __('Actions') }}</flux:column>
-            </flux:columns>
+            <x-table.columns>
+                <x-table.column>{{ __('Name') }}</x-table.column>
+                <x-table.column>{{ __('Database') }}</x-table.column>
+                <x-table.column>{{ __('Status') }}</x-table.column>
+                <x-table.column>{{ __('Created') }}</x-table.column>
+                <x-table.column>{{ __('Actions') }}</x-table.column>
+            </x-table.columns>
 
-            <flux:rows>
+            <x-table.rows>
                 @forelse ($organisations as $organisation)
-                    <flux:row :key="$organisation->id">
-                        <flux:cell>
+                    <x-table.row :key="$organisation->id">
+                        <x-table.cell>
                             <div class="font-medium text-gray-900 dark:text-gray-100">
                                 {{ $organisation->name }}
                             </div>
-                        </flux:cell>
-                        <flux:cell>
+                        </x-table.cell>
+                        <x-table.cell>
                             @if($organisation->database_host)
                                 <div class="text-sm">
                                     <div class="text-gray-900 dark:text-gray-100">{{ $organisation->database_name }}</div>
@@ -52,18 +52,18 @@
                             @else
                                 <span class="text-gray-400 dark:text-gray-500">{{ __('Not configured') }}</span>
                             @endif
-                        </flux:cell>
-                        <flux:cell>
+                        </x-table.cell>
+                        <x-table.cell>
                             @if($organisation->is_active)
                                 <flux:badge color="green" size="sm">{{ __('Active') }}</flux:badge>
                             @else
                                 <flux:badge color="zinc" size="sm">{{ __('Inactive') }}</flux:badge>
                             @endif
-                        </flux:cell>
-                        <flux:cell>
+                        </x-table.cell>
+                        <x-table.cell>
                             {{ $organisation->created_at->format('M d, Y') }}
-                        </flux:cell>
-                        <flux:cell>
+                        </x-table.cell>
+                        <x-table.cell>
                             <div class="flex items-center gap-2">
                                 <flux:button 
                                     size="sm" 
@@ -84,11 +84,11 @@
                                     {{ $organisation->is_active ? __('Deactivate') : __('Activate') }}
                                 </flux:button>
                             </div>
-                        </flux:cell>
-                    </flux:row>
+                        </x-table.cell>
+                    </x-table.row>
                 @empty
-                    <flux:row>
-                        <flux:cell colspan="5">
+                    <x-table.row>
+                        <x-table.cell colspan="5">
                             <div class="text-center py-8">
                                 <flux:icon.building-office-2 class="mx-auto h-12 w-12 text-gray-400" />
                                 <h3 class="mt-2 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ __('No organizations') }}</h3>
@@ -99,10 +99,10 @@
                                     </flux:button>
                                 </div>
                             </div>
-                        </flux:cell>
-                    </flux:row>
+                        </x-table.cell>
+                    </x-table.row>
                 @endforelse
-            </flux:rows>
+            </x-table.rows>
         </x-table>
 
         <!-- Pagination -->
@@ -115,13 +115,13 @@
     @if($showModal)
         <flux:modal name="organisation-form" wire:model="showModal" class="max-w-2xl">
             <form wire:submit.prevent="save">
-                <flux:modal.header>
+                
                     <flux:heading size="lg">
                         {{ $editMode ? __('Edit Organization') : __('Create Organization') }}
                     </flux:heading>
-                </flux:modal.header>
+                
 
-                <flux:modal.content>
+                
                     <div class="space-y-6">
                         <!-- Basic Information -->
                         <div>
@@ -190,16 +190,16 @@
                             </div>
                         </div>
                     </div>
-                </flux:modal.content>
+                
 
-                <flux:modal.footer>
+                
                     <flux:button type="button" variant="ghost" wire:click="closeModal">
                         {{ __('Cancel') }}
                     </flux:button>
                     <flux:button type="submit" variant="primary">
                         {{ $editMode ? __('Update') : __('Create') }}
                     </flux:button>
-                </flux:modal.footer>
+                
             </form>
         </flux:modal>
     @endif
@@ -207,11 +207,11 @@
     <!-- Test Connection Result Modal -->
     @if($showTestModal)
         <flux:modal name="test-connection" wire:model="showTestModal">
-            <flux:modal.header>
+            
                 <flux:heading size="lg">{{ __('Connection Test Result') }}</flux:heading>
-            </flux:modal.header>
+            
 
-            <flux:modal.content>
+            
                 <div class="py-4">
                     @if($testConnectionResult)
                         <div class="flex items-center gap-3 text-green-600 dark:text-green-400">
@@ -231,11 +231,11 @@
                         </div>
                     @endif
                 </div>
-            </flux:modal.content>
+            
 
-            <flux:modal.footer>
+            
                 <flux:button wire:click="closeTestModal">{{ __('Close') }}</flux:button>
-            </flux:modal.footer>
+            
         </flux:modal>
     @endif
 </div>

@@ -36,44 +36,44 @@
 
         <!-- Users Table -->
         <x-table>
-            <flux:columns>
-                <flux:column>{{ __('Name') }}</flux:column>
-                <flux:column>{{ __('Email') }}</flux:column>
-                <flux:column>{{ __('Role') }}</flux:column>
-                <flux:column>{{ __('Organization') }}</flux:column>
-                <flux:column>{{ __('Created') }}</flux:column>
-                <flux:column>{{ __('Actions') }}</flux:column>
-            </flux:columns>
+            <x-table.columns>
+                <x-table.column>{{ __('Name') }}</x-table.column>
+                <x-table.column>{{ __('Email') }}</x-table.column>
+                <x-table.column>{{ __('Role') }}</x-table.column>
+                <x-table.column>{{ __('Organization') }}</x-table.column>
+                <x-table.column>{{ __('Created') }}</x-table.column>
+                <x-table.column>{{ __('Actions') }}</x-table.column>
+            </x-table.columns>
 
-            <flux:rows>
+            <x-table.rows>
                 @forelse ($users as $user)
-                    <flux:row :key="$user->id">
-                        <flux:cell>
+                    <x-table.row :key="$user->id">
+                        <x-table.cell>
                             <div class="font-medium text-gray-900 dark:text-gray-100">
                                 {{ $user->name }}
                             </div>
-                        </flux:cell>
-                        <flux:cell>
+                        </x-table.cell>
+                        <x-table.cell>
                             {{ $user->email }}
-                        </flux:cell>
-                        <flux:cell>
+                        </x-table.cell>
+                        <x-table.cell>
                             @if($user->hasRole('admin'))
                                 <flux:badge color="purple" size="sm">{{ __('Admin') }}</flux:badge>
                             @else
                                 <flux:badge color="blue" size="sm">{{ __('User') }}</flux:badge>
                             @endif
-                        </flux:cell>
-                        <flux:cell>
+                        </x-table.cell>
+                        <x-table.cell>
                             @if($user->organisation)
                                 {{ $user->organisation->name }}
                             @else
                                 <span class="text-gray-400 dark:text-gray-500">{{ __('N/A') }}</span>
                             @endif
-                        </flux:cell>
-                        <flux:cell>
+                        </x-table.cell>
+                        <x-table.cell>
                             {{ $user->created_at->format('M d, Y') }}
-                        </flux:cell>
-                        <flux:cell>
+                        </x-table.cell>
+                        <x-table.cell>
                             <div class="flex items-center gap-2">
                                 <flux:button 
                                     size="sm" 
@@ -94,11 +94,11 @@
                                     {{ __('Delete') }}
                                 </flux:button>
                             </div>
-                        </flux:cell>
-                    </flux:row>
+                        </x-table.cell>
+                    </x-table.row>
                 @empty
-                    <flux:row>
-                        <flux:cell colspan="6">
+                    <x-table.row>
+                        <x-table.cell colspan="6">
                             <div class="text-center py-8">
                                 <flux:icon.users class="mx-auto h-12 w-12 text-gray-400" />
                                 <h3 class="mt-2 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ __('No users') }}</h3>
@@ -109,10 +109,10 @@
                                     </flux:button>
                                 </div>
                             </div>
-                        </flux:cell>
-                    </flux:row>
+                        </x-table.cell>
+                    </x-table.row>
                 @endforelse
-            </flux:rows>
+            </x-table.rows>
         </x-table>
 
         <!-- Pagination -->
@@ -125,13 +125,13 @@
     @if($showModal)
         <flux:modal name="user-form" wire:model="showModal" class="max-w-2xl">
             <form wire:submit.prevent="save">
-                <flux:modal.header>
+                
                     <flux:heading size="lg">
                         {{ $editMode ? __('Edit User') : __('Create User') }}
                     </flux:heading>
-                </flux:modal.header>
+                
 
-                <flux:modal.content>
+                
                     <div class="space-y-6">
                         <!-- Basic Information -->
                         <div class="space-y-4">
@@ -205,16 +205,16 @@
                             />
                         </div>
                     </div>
-                </flux:modal.content>
+                
 
-                <flux:modal.footer>
+                
                     <flux:button type="button" variant="ghost" wire:click="closeModal">
                         {{ __('Cancel') }}
                     </flux:button>
                     <flux:button type="submit" variant="primary">
                         {{ $editMode ? __('Update') : __('Create') }}
                     </flux:button>
-                </flux:modal.footer>
+                
             </form>
         </flux:modal>
     @endif

@@ -138,7 +138,7 @@
                         <x-card.content>
                             <div class="overflow-x-auto">
                                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                    <thead class="bg-gray-50 dark:bg-gray-800">
+                                    <thead class="bg-neutral-50 dark:bg-neutral-800">
                                         <tr>
                                             @foreach(array_keys($results[0]) as $column)
                                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -147,7 +147,7 @@
                                             @endforeach
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                                    <tbody class="bg-white dark:bg-neutral-900 divide-y divide-gray-200 dark:divide-gray-700">
                                         @foreach($results as $row)
                                             <tr>
                                                 @foreach($row as $value)
@@ -173,7 +173,7 @@
                     <x-card.content>
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-gray-800">
+                                <thead class="bg-neutral-50 dark:bg-neutral-800">
                                     <tr>
                                         @foreach(array_keys($results[0]) as $column)
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -182,7 +182,7 @@
                                         @endforeach
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                                <tbody class="bg-white dark:bg-neutral-900 divide-y divide-gray-200 dark:divide-gray-700">
                                     @foreach($results as $row)
                                         <tr>
                                             @foreach($row as $value)

@@ -38,45 +38,45 @@
 
             <!-- Reports Table -->
             <x-table>
-                <flux:columns>
-                    <flux:column>{{ __('Name') }}</flux:column>
-                    <flux:column>{{ __('Organization') }}</flux:column>
-                    <flux:column>{{ __('Type') }}</flux:column>
-                    <flux:column>{{ __('Status') }}</flux:column>
-                    <flux:column>{{ __('Created By') }}</flux:column>
-                    <flux:column>{{ __('Actions') }}</flux:column>
-                </flux:columns>
+                <x-table.columns>
+                    <x-table.column>{{ __('Name') }}</x-table.column>
+                    <x-table.column>{{ __('Organization') }}</x-table.column>
+                    <x-table.column>{{ __('Type') }}</x-table.column>
+                    <x-table.column>{{ __('Status') }}</x-table.column>
+                    <x-table.column>{{ __('Created By') }}</x-table.column>
+                    <x-table.column>{{ __('Actions') }}</x-table.column>
+                </x-table.columns>
 
-                <flux:rows>
+                <x-table.rows>
                     @forelse ($reports as $report)
-                        <flux:row :key="$report->id">
-                            <flux:cell>
+                        <x-table.row :key="$report->id">
+                            <x-table.cell>
                                 <div>
                                     <div class="font-medium text-gray-900 dark:text-gray-100">{{ $report->name }}</div>
                                     @if($report->description)
                                         <div class="text-sm text-gray-500 dark:text-gray-400">{{ Str::limit($report->description, 50) }}</div>
                                     @endif
                                 </div>
-                            </flux:cell>
-                            <flux:cell>
+                            </x-table.cell>
+                            <x-table.cell>
                                 {{ $report->organisation->name }}
-                            </flux:cell>
-                            <flux:cell>
+                            </x-table.cell>
+                            <x-table.cell>
                                 <flux:badge size="sm" :color="$report->visualization_type === 'chart' ? 'blue' : 'zinc'">
                                     {{ ucfirst($report->visualization_type) }}
                                 </flux:badge>
-                            </flux:cell>
-                            <flux:cell>
+                            </x-table.cell>
+                            <x-table.cell>
                                 @if($report->is_active)
                                     <flux:badge color="green" size="sm">{{ __('Active') }}</flux:badge>
                                 @else
                                     <flux:badge color="zinc" size="sm">{{ __('Inactive') }}</flux:badge>
                                 @endif
-                            </flux:cell>
-                            <flux:cell>
+                            </x-table.cell>
+                            <x-table.cell>
                                 {{ $report->creator->name }}
-                            </flux:cell>
-                            <flux:cell>
+                            </x-table.cell>
+                            <x-table.cell>
                                 <div class="flex items-center gap-2">
                                     <flux:button 
                                         size="sm" 
@@ -96,11 +96,11 @@
                                         {{ $report->is_active ? __('Deactivate') : __('Activate') }}
                                     </flux:button>
                                 </div>
-                            </flux:cell>
-                        </flux:row>
+                            </x-table.cell>
+                        </x-table.row>
                     @empty
-                        <flux:row>
-                            <flux:cell colspan="6">
+                        <x-table.row>
+                            <x-table.cell colspan="6">
                                 <div class="text-center py-8">
                                     <flux:icon.chart-bar class="mx-auto h-12 w-12 text-gray-400" />
                                     <h3 class="mt-2 text-sm font-semibold text-gray-900 dark:text-gray-100">{{ __('No reports') }}</h3>
@@ -111,10 +111,10 @@
                                         </flux:button>
                                     </div>
                                 </div>
-                            </flux:cell>
-                        </flux:row>
+                            </x-table.cell>
+                        </x-table.row>
                     @endforelse
-                </flux:rows>
+                </x-table.rows>
             </x-table>
 
             <!-- Pagination -->
@@ -195,10 +195,10 @@
                                     <div class="mt-4 space-y-2 max-h-96 overflow-y-auto">
                                         @foreach($schema as $table)
                                             <details class="border border-gray-200 dark:border-gray-700 rounded-lg">
-                                                <summary class="px-3 py-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 font-medium text-sm">
+                                                <summary class="px-3 py-2 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800 font-medium text-sm">
                                                     {{ $table['name'] }}
                                                 </summary>
-                                                <div class="px-3 py-2 bg-gray-50 dark:bg-gray-800 text-xs space-y-1">
+                                                <div class="px-3 py-2 bg-neutral-50 dark:bg-neutral-800 text-xs space-y-1">
                                                     @foreach($table['columns'] as $column)
                                                         <div class="flex justify-between items-center py-1">
                                                             <span class="font-mono">{{ $column['name'] }}</span>
@@ -292,7 +292,7 @@
                                 </flux:radio.group>
 
                                 @if($visualization_type === 'chart')
-                                    <div class="space-y-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                    <div class="space-y-4 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
                                         <flux:select 
                                             label="Chart Type" 
                                             wire:model="chart_type"
@@ -343,11 +343,11 @@
     <!-- Preview Modal -->
     @if($showPreview)
         <flux:modal name="preview" wire:model="showPreview" class="max-w-6xl">
-            <flux:modal.header>
+            
                 <flux:heading size="lg">{{ __('Query Preview') }}</flux:heading>
-            </flux:modal.header>
+            
 
-            <flux:modal.content>
+            
                 @if($previewError)
                     <x-banner variant="danger">
                         <strong>{{ __('Validation Error:') }}</strong> {{ $previewError }}
@@ -355,7 +355,7 @@
                 @elseif(count($previewResults) > 0)
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                            <thead class="bg-gray-50 dark:bg-gray-800">
+                            <thead class="bg-neutral-50 dark:bg-neutral-800">
                                 <tr>
                                     @foreach(array_keys($previewResults[0]) as $column)
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -364,7 +364,7 @@
                                     @endforeach
                                 </tr>
                             </thead>
-                            <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                            <tbody class="bg-white dark:bg-neutral-900 divide-y divide-gray-200 dark:divide-gray-700">
                                 @foreach($previewResults as $row)
                                     <tr>
                                         @foreach($row as $value)
@@ -381,11 +381,11 @@
                 @else
                     <p class="text-gray-500">{{ __('No results returned.') }}</p>
                 @endif
-            </flux:modal.content>
+            
 
-            <flux:modal.footer>
+            
                 <flux:button wire:click="closePreview">{{ __('Close') }}</flux:button>
-            </flux:modal.footer>
+            
         </flux:modal>
     @endif
 </div>

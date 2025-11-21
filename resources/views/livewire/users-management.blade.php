@@ -92,7 +92,7 @@
     </div>
 
     <!-- Modal -->
-    <flux:modal wire:model="showModal" class="min-w-[600px]">
+    <x-modal wire:model="showModal" class="min-w-[600px]">
         <form wire:submit="save">
             <flux:heading size="lg">{{ $editingUserId ? 'Edit User' : 'Add New User' }}</flux:heading>
 
@@ -136,5 +136,5 @@
                 <flux:button type="submit" variant="primary">Save</flux:button>
             </div>
         </form>
-    </flux:modal>
+    </x-modal>
 </div>
