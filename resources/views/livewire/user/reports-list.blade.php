@@ -21,7 +21,8 @@
             @if($reports->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($reports as $report)
-                        <x-card class="hover:shadow-lg transition-shadow duration-200 cursor-pointer" wire:click="$navigate('{{ route('user.reports.view', $report->id) }}')">
+                        <a href="{{ route('user.reports.view', $report->id) }}" wire:navigate>
+                        <x-card class="hover:shadow-lg transition-shadow duration-200 cursor-pointer">
                             <x-card.header>
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
@@ -50,12 +51,13 @@
                                 </div>
                             </x-card.content>
 
-                            <x-card.footer>
-                                <flux:button variant="primary" size="sm" wire:navigate href="{{ route('user.reports.view', $report->id) }}">
+                            <x-card.footer class="flex justify-end">
+                                <span class="text-sm font-medium text-blue-600 dark:text-blue-400">
                                     {{ __('View Report') }} →
-                                </flux:button>
+                                </span>
                             </x-card.footer>
                         </x-card>
+                        </a>
                     @endforeach
                 </div>
 

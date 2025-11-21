@@ -32,9 +32,9 @@
                 </x-card.content>
             </x-card>
         @else
-            <flux:banner variant="warning">
+            <x-banner variant="warning">
                 {{ __('You are not assigned to an organization. Please contact your administrator.') }}
-            </flux:banner>
+            </x-banner>
         @endif
 
         <!-- Quick Access -->
@@ -45,7 +45,7 @@
                 </x-card.header>
 
                 <x-card.content>
-                    <flux:button href="{{ route('user.reports.index') }}" wire:navigate icon="chart-bar" size="lg">
+                    <flux:button href="{{ route('user.reports.index') }}" wire:navigate icon="chart-bar">
                         {{ __('View Reports') }} →
                     </flux:button>
                 </x-card.content>
