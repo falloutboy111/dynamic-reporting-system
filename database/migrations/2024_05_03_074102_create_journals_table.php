@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('journals', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('organisation_id');
+            $table->string('journal_id');
+            $table->string('journal_date');
+            $table->integer('journal_number');
+            $table->string('created_date_utc');
+            $table->string('reference')->nullable();
+            $table->string('source_id')->nullable();
+            $table->string('source_type')->nullable();
+            $table->timestamps();
+
+            $table->foreign('organisation_id')->references('id')->on('organisations')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('journals');
+    }
+};
+
