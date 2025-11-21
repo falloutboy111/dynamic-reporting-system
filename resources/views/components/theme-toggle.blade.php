@@ -1,7 +1,7 @@
 <button 
     type="button"
     x-data="{ 
-        theme: localStorage.getItem('theme') || 'light',
+        theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
         toggleTheme() {
             this.theme = this.theme === 'dark' ? 'light' : 'dark';
             localStorage.setItem('theme', this.theme);
@@ -12,12 +12,6 @@
             }
         }
     }"
-    x-init="
-        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            theme = 'dark';
-        }
-    "
     @click="toggleTheme()"
     class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
     title="Toggle theme"

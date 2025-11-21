@@ -15,6 +15,18 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
         @fluxAppearance
+
+        <!-- Theme Script - Must run before page renders -->
+        <script>
+            (function() {
+                const theme = localStorage.getItem('theme');
+                if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            })();
+        </script>
     </head>
     <body class="min-h-screen bg-zinc-50 dark:bg-zinc-900">
         {{-- Desktop and Mobile Sidebar --}}
