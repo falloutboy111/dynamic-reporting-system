@@ -13,18 +13,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <!-- Theme Script - Must run before page renders -->
-        <script>
-            (function() {
-                const theme = localStorage.getItem('theme');
-                if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            })();
-        </script>
+        
+        @fluxAppearance
     </head>
     <body class="font-sans text-gray-900 dark:text-gray-100 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-neutral-100 dark:bg-neutral-900">
@@ -38,5 +28,7 @@
                 {{ $slot }}
             </div>
         </div>
+        
+        @fluxScripts
     </body>
 </html>

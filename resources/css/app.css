@@ -1,7 +1,10 @@
+@import "tailwindcss";
 @import '../../vendor/livewire/flux/dist/flux.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@plugin "@tailwindcss/forms";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-family-sans: 'Figtree', system-ui, sans-serif;
+}

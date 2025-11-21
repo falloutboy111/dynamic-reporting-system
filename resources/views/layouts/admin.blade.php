@@ -74,6 +74,31 @@
 
             <flux:sidebar.spacer />
 
+            {{-- Theme Switcher --}}
+            <div class="px-2 py-2 border-t border-zinc-200 dark:border-zinc-700">
+                <flux:dropdown align="end">
+                    <flux:button variant="ghost" size="sm" class="w-full justify-start" x-data>
+                        <flux:icon.sun x-show="$flux.appearance === 'light'" variant="mini" class="size-5" />
+                        <flux:icon.moon x-show="$flux.appearance === 'dark'" variant="mini" class="size-5" />
+                        <flux:icon.moon x-show="$flux.appearance === 'system' && $flux.dark" variant="mini" class="size-5" />
+                        <flux:icon.sun x-show="$flux.appearance === 'system' && ! $flux.dark" variant="mini" class="size-5" />
+                        <span>{{ __('Theme') }}</span>
+                    </flux:button>
+                    
+                    <flux:menu>
+                        <flux:menu.item icon="sun" x-on:click="$flux.appearance = 'light'">
+                            {{ __('Light') }}
+                        </flux:menu.item>
+                        <flux:menu.item icon="moon" x-on:click="$flux.appearance = 'dark'">
+                            {{ __('Dark') }}
+                        </flux:menu.item>
+                        <flux:menu.item icon="computer-desktop" x-on:click="$flux.appearance = 'system'">
+                            {{ __('System') }}
+                        </flux:menu.item>
+                    </flux:menu>
+                </flux:dropdown>
+            </div>
+
             <flux:dropdown position="top" align="start" class="max-lg:hidden">
                 <flux:sidebar.profile 
                     name="{{ auth()->user()->name }}" 
